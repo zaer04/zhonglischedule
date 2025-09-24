@@ -1,32 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zhongli's Schedule</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zhongli's Schedule</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Zhongli's Schedule</h1>
-        <form id="daySelector">
-            <label for="day">Select a day:</label>
-            <select id="day" name="day" required>
-                <option value="Monday">Monday</option>
-                <option value="Tuesday">Tuesday</option>
-                <option value="Wednesday">Wednesday</option>
-                <option value="Thursday">Thursday</option>
-                <option value="Friday">Friday</option>
-                <option value="Saturday">Saturday</option>
-                <option value="Sunday">Sunday</option>
-            </select>
-            <button type="submit">Get Schedule</button>
-        </form>
+  <div class="container">
+    <h1>Zhongli's Schedule</h1>
+    <form id="daySelector">
+      <label for="day">Select a day:</label>
+      <select id="day" name="day" required>
+        <option value="Monday">Monday</option>
+        <option value="Tuesday">Tuesday</option>
+        <option value="Wednesday">Wednesday</option>
+        <option value="Thursday">Thursday</option>
+        <option value="Friday">Friday</option>
+        <option value="Saturday">Saturday</option>
+        <option value="Sunday">Sunday</option>
+      </select>
+      <button type="submit">Get Schedule</button>
+    </form>
 
-        <div id="activities"></div>
-    </div>
+    <div id="activities"></div>
+  </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="script.js"></script>
+  <script>
+    const activities = {
+      "Monday": ["Archaeology Research", "Afternoon Tea at Liyue Harbor"],
+      "Tuesday": ["Mining Ores in Dihua Marsh", "Dinner at Wangshu Inn"],
+      "Wednesday": ["Work at the Wangsheng Funeral Parlor", "Enjoy some Osmanthus Wine"],
+      "Thursday": ["Check in with the Millileth", "Enjoy Dinner made by Xiangling and Guoba"],
+      "Friday": ["Visit Qingce Village", "Search for Cor Lapis"],
+      "Saturday": ["Teach Childe about Liyue Mannerisms", "Visit the Chasm"],
+      "Sunday": ["Visit Chenyu Vale", "Enjoy tea in Cloud Retainer's abode"]
+    };
+
+    document.getElementById("daySelector").addEventListener("submit", function(event) {
+      event.preventDefault(); // stop page refresh
+      const day = document.getElementById("day").value;
+      const output = document.getElementById("activities");
+
+      if (activities[day]) {
+        output.innerHTML = activities[day]
+          .map(activity => `<p>${activity}</p>`)
+          .join("");
+      } else {
+        output.innerHTML = `<p>No activities planned for ${day}.</p>`;
+      }
+    });
+  </script>
 </body>
 </html>
+
